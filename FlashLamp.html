@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="turnoff()">Tat</button>
+<button onclick="turnOn()">Bat</button>
+<script>
+    function Battery(energy) {
+        this.energy= energy;
+        this.setEnergy = function (energy) {
+            this.energy = energy;
+        };
+        this.getEnergy = function () {
+            return this.energy;
+        };
+        this.decreaseEnergy = function () {
+            if(this.energy>0){
+               this.energy--;
+            }
+        }
+    }
+    function FlashLamp(battery, status) {
+        this.battery=battery;
+        this.status=status;
+        this.setBattery = function (battery) {
+            this.battery = battery;
+        };
+        this.getBatteryInfo = function () {
+            return this.battery.getEnergy();
+        };
+        this.light = function () {
+            if(this.status===true){
+                alert("Lighting");
+            }else {
+                alert("Not lighting");
+            }
+        };
+        this.turnOn = function () {
+            this.status = true;
+            this.battery.decreaseEnergy();
+        };
+        this.turnOff = function () {
+            this.status = false;
+        }
+    }
+    let battery = new Battery(10);
+    let flashLamp = new FlashLamp(battery, true);
+
+    function turnoff() {
+        flashLamp.turnOff();
+        flashLamp.light();
+        console.log(battery.getEnergy());
+    }
+    function turnOn() {
+        flashLamp.turnOn();
+        flashLamp.light();
+        console.log(battery.getEnergy());
+    }
+</script>
+</body>
+</html>
